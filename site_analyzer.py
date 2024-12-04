@@ -40,11 +40,11 @@ def df_lim(text, low_limit, upp_limit):
     return df
 
 # Streamlit app UI
-st.header('Internet Sites Word Analyzer', divider='rainbow')
+st.header('Website Word Analyzer 📖', divider='rainbow')
 
 url = st.text_input('Input URL', '')
 if url:
-    st.write('The URL for analysis is', url)
+    st.write('Your url is ', url)
 
     # Slider for both lower and upper limits
     low_limit, upp_limit = st.slider(
@@ -66,5 +66,5 @@ if url:
 
     # Plot output part
     st.divider()
-    st.write('Words from the site')
+    st.write('Barchart')
     st.bar_chart(df)
