@@ -6,6 +6,12 @@ from bs4 import BeautifulSoup
 from collections import Counter
 import streamlit as st
 
+# Function to check the URL
+def sanitize_url(url):
+    if not url.startswith(('http://', 'https://')):
+        url = 'https://' + url
+    return url
+    
 # Function to fetch soup from URL
 def soup_from_url(url):
     request = Request(url)
@@ -44,6 +50,7 @@ st.header('Website Word Analyzer 📖', divider='rainbow')
 
 url = st.text_input('Input URL', '')
 if url:
+    url = sanitize_url(url)
     st.write('Your url is ', url)
 
     # Slider for both lower and upper limits
@@ -59,12 +66,12 @@ if url:
     text = text_proc(soup)
     df = df_lim(text, low_limit, upp_limit)
 
-    # Table output part
+    # Output a table with top 5
     st.divider()
     st.write('Top-5 words from the site')
     st.write(df.head(5))
 
-    # Plot output part
+    # Output a barchart
     st.divider()
     st.write('Barchart')
     st.bar_chart(df)
